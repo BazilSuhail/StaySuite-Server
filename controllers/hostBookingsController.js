@@ -93,6 +93,7 @@ exports.updateBookingStatus = async (req, res) => {
     const newCheckOut = new Date(updatedBooking.checkOut).toDateString();
     // Notify the host
     const message = {
+      message: "Your reservation is updated",
       title: "Reservation Status Updated to ",
       details: `Your reservation for "${host_Id.address.suburb}","${host_Id.address.country}" between "${updatedBooking.checkIn}" and "${updatedBooking.checkOut}" has been update to "${status}" by Host "${hostName.username}".`,
       address: host_Id.address.suburb + ", " + host_Id.address.country,

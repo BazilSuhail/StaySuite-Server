@@ -3,22 +3,18 @@ const bcrypt = require('bcryptjs');
 
 const userSchema = new mongoose.Schema({
   username: {
-    type: String,
-    //required: true, 
-    //unique: true, 
+    type: String, 
     default: 'User 1',
     trim: true
   },
   email: {
-    type: String,
-    //required: true, 
+    type: String, 
     unique: true,
     lowercase: true,
     trim: true
   },
   password: {
-    type: String,
-    //required: true, 
+    type: String, 
     minlength: 6
   },
   phoneNumber: {
@@ -36,16 +32,14 @@ const userSchema = new mongoose.Schema({
     required: true
   },
   dob: {
-    type: Date,
-    //required: true 
+    type: Date, 
   },
   profilePicture: {
     type: String,
     default: '1'
   },
   phoneNumber: {
-    type: String,
-    //required: true, 
+    type: String, 
     validate: {
       validator: function (v) {
         return /^\+?[1-9]\d{1,14}$/.test(v);
@@ -106,7 +100,7 @@ const userSchema = new mongoose.Schema({
   },
   hosted_listings: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'HostListing',  // Reference to the HostListing document
+    ref: 'HostListing',
     default: null
   }
 });

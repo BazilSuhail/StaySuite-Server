@@ -61,6 +61,7 @@ exports.createBooking = async (req, res) => {
 
     // Notify the host
     const message = {
+      message: "Your Listing has a new reservation",
       location: ListingAddress.address.suburb + ", " + ListingAddress.address.country,
       details: specialRequests,
       listing_Id: listingId,
