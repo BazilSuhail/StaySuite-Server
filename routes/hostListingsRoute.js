@@ -33,6 +33,6 @@ router.get('/hosted-listings', authenticate, getHostedListings);
 
 router.put('/update-listing/:id', authenticate, updateListing);
 
-router.delete('/delete-listing/:id', authenticate, deleteListing);
+router.delete('/delete-listing/:listingId', authenticate, deleteListing);
 
 module.exports = router;

@@ -3,12 +3,15 @@ const bcrypt = require('bcryptjs');
 
 const userSchema = new mongoose.Schema({
   username: {
-    type: String, 
-    default: 'User 1',
+    type: String,
+    //required: true, 
+    //unique: true, 
+    default: 'New User',
     trim: true
   },
   email: {
-    type: String, 
+    type: String,
+    //required: true, 
     unique: true,
     lowercase: true,
     trim: true
@@ -19,7 +22,7 @@ const userSchema = new mongoose.Schema({
   },
   phoneNumber: {
     type: String, 
-    default: '03*********', 
+    default: '03000000000', 
   },
   role: {
     type: String,
@@ -32,21 +35,23 @@ const userSchema = new mongoose.Schema({
     required: true
   },
   dob: {
-    type: Date, 
+    type: Date,
+    //required: true 
   },
   profilePicture: {
     type: String,
     default: '1'
   },
-  phoneNumber: {
-    type: String, 
+  /*phoneNumber: {
+    type: String,
+    //required: true, 
     validate: {
       validator: function (v) {
         return /^\+?[1-9]\d{1,14}$/.test(v);
       },
       message: props => `${props.value} is not a valid phone number!`
     }
-  },
+  },*/
   bio: {
     type: String,
     default: 'Hi, I’m new here!',

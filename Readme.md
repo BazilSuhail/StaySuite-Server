@@ -40,7 +40,7 @@ This project is a basic Airbnb clone's backend, featuring user authentication, b
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/bazil-1854/BSCS22072_AirBnb_Client.git
+   git clone https://github.com/bazil-1854/BSCS22072_AirBnb_Server.git
    cd <where-you-cloned>
    ```
 

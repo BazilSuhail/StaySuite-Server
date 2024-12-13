@@ -59,7 +59,7 @@ exports.createBooking = async (req, res) => {
     const ListingAddress = await Listing.findById(listingId).select("address");
     //console.log(ListingAddress.country);
 
-    // Notify the host
+    // Notifing the host
     const message = {
       message: "Your Listing has a new reservation",
       location: ListingAddress.address.suburb + ", " + ListingAddress.address.country,

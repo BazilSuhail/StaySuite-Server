@@ -2,6 +2,7 @@ const Listing = require('../models/listings');
 const User = require('../models/user');
 const ListingBooking = require('../models/listing_bookings');
 const HostingListings = require('../models/hosted_listings');
+const ListingReviews = require('../models/listings_reviews'); 
 const user = require('../models/user');
 const ListingReview = require('../models/listings_reviews');
 const path = require('path');
@@ -200,7 +201,9 @@ exports.updateListing = async (req, res) => {
 
 
 exports.deleteListing = async (req, res) => {
-  const listingId = req.params.id;
+
+  const { listingId } = req.params;
+  //const listingId = req.params._id;
   const userId = req.user.id;
   //console.log(userId)
   try {
@@ -223,9 +226,18 @@ exports.deleteListing = async (req, res) => {
     if (!updatedHostListing) {
       return res.status(404).json({ message: 'Failed to update hosted listings.' });
     }
-
+    //console.log(listingId)
+    
     const deletedListing = await Listing.findByIdAndDelete(listingId);
     if (!deletedListing) {
+      return res.status(404).json({ message: 'Listing not found.' });
+    }
+    const deletedListingReviews = await ListingReviews.findByIdAndDelete(listingId);
+    if (!deletedListingReviews) {
+      return res.status(404).json({ message: 'Listing not found.' });
+    }
+    const deletedListingBookings = await ListingBooking.findByIdAndDelete(listingId);
+    if (!deletedListingBookings) {
       return res.status(404).json({ message: 'Listing not found.' });
     }
 

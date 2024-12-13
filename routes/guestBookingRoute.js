@@ -4,7 +4,6 @@ const authenticate = require('../middleware/authMiddleware');
 
 const router = express.Router();
 
-// Route to create a booking
 router.post('/create-booking', authenticate, createBooking);
 
 router.get('/get-reserved-bookings/:listingId', getBlockedDates);

@@ -40,36 +40,6 @@ exports.getHostBookings = async (req, res) => {
   }
 };
 
-
-// Get bookings for all host's listings
-/*exports.getHostBookings = async (req, res) => {
-    try {
-        const userId = req.user.id;
-
-        // Find the host's booking document
-        const hostedBookings = await HostBookings.findById(userId);
-
-        if (!hostedBookings) {
-            return res.status(404).json({ message: 'No bookings found for this host.' });
-        }
-
-        // Fetch each booking document by its ID
-        const bookings = await Promise.all(
-            hostedBookings.bookings.map(async (bookingId) => {
-                const booking = await Booking.findById(bookingId);
-                return booking;
-            })
-        );
-
-        res.status(200).json({ bookings });
-    } catch (error) {
-        console.error('Error fetching host bookings:', error);
-        res.status(500).json({ error: 'Failed to fetch bookings for host listings.' });
-    }
-};
-*/
-
-
 exports.updateBookingStatus = async (req, res) => {
   try {
     const { bookingID, status } = req.body;
@@ -117,28 +87,6 @@ exports.updateBookingStatus = async (req, res) => {
     res.status(500).json({ error: 'Failed to update booking status.' });
   }
 };
-
-
-/*exports.updateBookingStatus = async (req, res) => {
-    try {
-        const { bookingID, status } = req.body; 
-        const updatedBooking = await Booking.findByIdAndUpdate(
-            bookingID,
-            { status },
-            { new: true }
-        );
-
-        if (!updatedBooking) {
-            return res.status(404).json({ message: 'Booking not found.' });
-        }
-
-        res.status(200).json({ message: 'Booking status updated.', booking: updatedBooking });
-    } 
-    catch (error) {
-        console.error('Error updating booking status:', error);
-        res.status(500).json({ error: 'Failed to update booking status.' });
-    }
-};*/
 
 exports.getUserDetailsById = async (req, res) => {
   try {
