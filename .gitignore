@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # compiled output
 /dist
 /node_modules
@@ -54,3 +55,7 @@ pids
 
 # Diagnostic reports (https://nodejs.org/api/report.html)
 report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
+=======
+/node_modules 
+listing_images/
+>>>>>>> 2a7f0e453228315faedc2edfb10f9f5bbe5b1879
