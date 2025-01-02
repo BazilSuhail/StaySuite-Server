@@ -1,12 +1,12 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { Document, Schema as MongooseSchema } from 'mongoose';
+import mongoose, { Document } from 'mongoose';
 
-@Schema({ timestamps: true }) // Automatically manages `createdAt` and `updatedAt`
+@Schema({ timestamps: true })
 export class User extends Document {
   @Prop({ default: 'New User', trim: true })
   username: string;
 
-  @Prop({ required: true, unique: true, lowercase: true, trim: true })
+  @Prop({ unique: true, lowercase: true, trim: true })
   email: string;
 
   @Prop({ minlength: 6 })
@@ -34,7 +34,9 @@ export class User extends Document {
     type: [String],
     default: [],
     validate: {
-      validator: (v: string[]) => v.length <= 10,
+      validator: function (v) {
+        return v.length <= 10;
+      },
       message: 'You can specify up to 10 interests only.',
     },
   })
@@ -44,16 +46,22 @@ export class User extends Document {
     type: [String],
     default: [],
     validate: {
-      validator: (v: string[]) => v.length <= 5,
+      validator: function (v) {
+        return v.length <= 5;
+      },
       message: 'You can specify up to 5 languages only.',
     },
   })
   languages: string[];
 
   @Prop({
-    type: {
-      city: { type: String, default: '' },
-      country: { type: String, default: '' },
+    type: Object,
+    default: { city: '', country: '' },
+    validate: {
+      validator: function (v: any) {
+        return typeof v.city === 'string' && typeof v.country === 'string';
+      },
+      message: 'Location should have city and country as strings.',
     },
   })
   location: { city: string; country: string };
@@ -65,10 +73,17 @@ export class User extends Document {
   about: string;
 
   @Prop({
-    type: {
-      facebook: { type: String, default: '' },
-      instagram: { type: String, default: '' },
-      linkedin: { type: String, default: '' },
+    type: Object,
+    default: { facebook: '', instagram: '', linkedin: '' },
+    validate: {
+      validator: function (v: any) {
+        return (
+          typeof v.facebook === 'string' &&
+          typeof v.instagram === 'string' &&
+          typeof v.linkedin === 'string'
+        );
+      },
+      message: 'Social links should have facebook, instagram, and linkedin as strings.',
     },
   })
   socialLinks: { facebook: string; instagram: string; linkedin: string };
@@ -76,15 +91,8 @@ export class User extends Document {
   @Prop({ default: false })
   verified: boolean;
 
-  @Prop({
-    type: MongooseSchema.Types.ObjectId,
-    ref: 'HostListing',
-    default: null,
-  })
-  hosted_listings: MongooseSchema.Types.ObjectId | null;
+  @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'HostListing', default: null })
+  hosted_listings: mongoose.Schema.Types.ObjectId;
 }
 
 export const UserSchema = SchemaFactory.createForClass(User);
-
-// Add index for email
-//UserSchema.index({ email: 1 });
