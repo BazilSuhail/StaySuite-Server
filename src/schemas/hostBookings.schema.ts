@@ -2,7 +2,7 @@ import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document } from 'mongoose';
 
 @Schema()
-export class HostBooking extends Document {
+export class HostBookings extends Document {
   @Prop({ type: Number, required: true })
   bookingsMade: number;
 
@@ -10,4 +10,4 @@ export class HostBooking extends Document {
   bookings: string[];
 }
 
-export const HostBookingSchema = SchemaFactory.createForClass(HostBooking);
+export const HostBookingSchema = SchemaFactory.createForClass(HostBookings);

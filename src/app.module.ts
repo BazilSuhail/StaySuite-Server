@@ -10,6 +10,7 @@ import { ServeStaticModule } from '@nestjs/serve-static';
 import { join } from 'path';
 import { SocketGateway } from './socket-gateway';
 import { GuestBookingsModule } from './guestBooking/guestBooking.module';
+import { HostBookingsModule } from './hostBooking/hostBooking.module';
 //const SocketGateway = require('./socket-gateway');
 
 @Module({
@@ -20,14 +21,16 @@ import { GuestBookingsModule } from './guestBooking/guestBooking.module';
     }),
     ConfigModule.forRoot({ isGlobal: true }), // Load .env globally
     MongooseModule.forRoot(process.env.MONGODB_URI), // Connect to MongoDB
-    AuthModule, // Auth module
-    ProfileModule, // Auth module
+    
+    AuthModule,
+    ProfileModule,
     ListingsModule,
     ListingRatingModule,
     HostListingsModule,
     GuestBookingsModule,
+    HostBookingsModule,
   ],
 
-  providers: [SocketGateway], // Register the WebSocket Gateway
+  providers: [SocketGateway], // Register the SocketGateway as a provider
 })
 export class AppModule { }

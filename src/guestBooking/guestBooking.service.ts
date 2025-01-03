@@ -6,7 +6,7 @@ import { FinalizeBookingDto } from './dto/finalize-booking.dto';
 import { Booking } from 'src/schemas/booking.schema';
 import { Listing } from 'src/schemas/listing.schema';
 import { GuestBookings } from 'src/schemas/guestBookings.schema';
-import { HostBooking } from 'src/schemas/hostBookings.schema';
+import { HostBookings } from 'src/schemas/hostBookings.schema';
 import { ListingBooking } from 'src/schemas/listingBookings.schema';
 import { SocketGateway } from '../socket-gateway';
 
@@ -16,7 +16,7 @@ export class GuestBookingsService {
     @InjectModel(Booking.name) private readonly bookingModel: Model<Booking>,
     @InjectModel(Listing.name) private readonly listingModel: Model<Listing>,
     @InjectModel(GuestBookings.name) private readonly guestBookingModel: Model<GuestBookings>,
-    @InjectModel(HostBooking.name) private readonly hostBookingModel: Model<HostBooking>,
+    @InjectModel(HostBookings.name) private readonly hostBookingModel: Model<HostBookings>,
     @InjectModel(ListingBooking.name) private readonly listingBookingModel: Model<ListingBooking>,
     private readonly socketGateway: SocketGateway,
   ) { }
