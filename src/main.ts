@@ -2,6 +2,8 @@ import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import * as dotenv from 'dotenv';
 
+const express = require('express');
+const path = require('path');
 // Load environment variables
 dotenv.config();
 
@@ -14,6 +16,8 @@ async function bootstrap() {
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
     credentials: true, // Allow cookies and credentials
   });
+
+  app.use('/listing_images', express.static(path.join(__dirname, '..', 'listing_images')));
 
   const port = process.env.PORT || 3001; // Use environment variable or default to 3001
   await app.listen(port);
