@@ -2,7 +2,7 @@ import { Controller, Post, Get, Put, Delete, Param, Body, UseGuards, Req, UseInt
 import { HostListingsService } from './hostListing.service';
 import { JwtAuthGuard } from '../jwt-auth.guard'; // Assuming you have an auth guard
 import { multerConfig } from '../multer.config';
-import { FilesInterceptor } from '@nestjs/platform-express';
+import { FileFieldsInterceptor, FilesInterceptor } from '@nestjs/platform-express';
 import { CreateListingWithImagesDto } from './dto/createListingImages.dto';
 import { CreateListingDto } from './dto/createListing.dto';
 import { UpdateListingDto } from './dto/updateListing.dto';
@@ -11,7 +11,7 @@ import { UpdateListingDto } from './dto/updateListing.dto';
 @Controller('air-bnb/hosting')
 @UseGuards(JwtAuthGuard)
 export class HostListingsController {
-  constructor(private readonly hostListingsService: HostListingsService) {}
+  constructor(private readonly hostListingsService: HostListingsService) { }
 
   @Post('add-listing')
   async addListing(@Req() req: any, @Body() createListingDto: CreateListingDto) {
@@ -19,16 +19,35 @@ export class HostListingsController {
     return await this.hostListingsService.addListing(createListingDto, userId);
   }
 
+  // @Post('add-listing-with-images')  
+  // @UseInterceptors(FilesInterceptor('placeImage', 5, multerConfig))
+
   @Post('add-listing-with-images')
-  @UseInterceptors(FilesInterceptor('placeImage', 5, multerConfig))
+  @UseInterceptors(
+    FileFieldsInterceptor(
+      [
+        { name: 'placeImage', maxCount: 1 },
+        { name: 'coverImage', maxCount: 1 },
+        { name: 'additionalImages', maxCount: 5 },
+      ],
+      multerConfig,
+    ),
+  )
   async addListingWithImages(@Req() req: any, @Body() createListingDto: CreateListingWithImagesDto) {
     const userId = req.user.id;
     // Handle image paths
+    const files = req.files;
     const images = {
+      placePicture: `${process.env.SERVER_URL}listing-images/${files['placeImage'][0].filename}`,
+      coverPicture: `${process.env.SERVER_URL}listing-images/${files['coverImage'][0].filename}`,
+      additionalPictures: files['additionalImages'].map((file) => `${process.env.SERVER_URL}listing-images/${file.filename}`),
+    };
+
+    /*const images = {
       placePicture: req.files['placeImage'][0].path,
       coverPicture: req.files['coverImage'][0].path,
       additionalPictures: req.files['additionalImages'].map(file => file.path),
-    };
+    };*/
     const updatedDto = { ...createListingDto, images };
     return await this.hostListingsService.addListing(updatedDto, userId);
   }

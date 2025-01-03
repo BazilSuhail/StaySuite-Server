@@ -17,7 +17,7 @@ async function bootstrap() {
     credentials: true, // Allow cookies and credentials
   });
 
-  app.use('/listing_images', express.static(path.join(__dirname, '..', 'listing_images')));
+  //app.use('/listing_images', express.static(path.join(__dirname, '..', 'listing_images')));
 
   const port = process.env.PORT || 3001; // Use environment variable or default to 3001
   await app.listen(port);
