@@ -16,21 +16,15 @@ export class ProfileService {
   ) {}
 
   async getProfile(userId: string): Promise<User> {
-    console.log(`Fetching profile for userId: ${userId}`);
-  
-    // Attempt to find the user by ID
+    //console.log(`Fetching profile for userId: ${userId}`);
     const user = await this.userModel.findById(userId).select('-password').exec();
-    
-    // Log the result of the user search
-    console.log('User found:', user);
+    //console.log('User found:', user);
   
-    // If user not found, throw an exception and log it
     if (!user) {
       console.error('User not found');
       throw new NotFoundException('User not found');
     }
   
-    // Log successful user retrieval
     console.log('Returning user profile:', user);
   
     return user;

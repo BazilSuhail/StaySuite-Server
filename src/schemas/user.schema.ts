@@ -93,6 +93,13 @@ export class User extends Document {
 
   @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'HostListing', default: null })
   hosted_listings: mongoose.Schema.Types.ObjectId;
+
+  // Explicitly define createdAt and updatedAt as part of the model
+  @Prop()
+  createdAt: Date;
+
+  @Prop()
+  updatedAt: Date;
 }
 
 export const UserSchema = SchemaFactory.createForClass(User);
