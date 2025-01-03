@@ -3,20 +3,14 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { GuestBookingsController } from './guestBooking.controller';
 import { GuestBookingsService } from './guestBooking.service';
 
-
 import { Booking, BookingSchema } from 'src/schemas/booking.schema';
-import { Listing, ListingSchema } from '../schemas/listing.schema'; // Import Listing schema
+import { Listing, ListingSchema } from '../schemas/listing.schema';
 import { GuestBookings, GuestBookingSchema } from 'src/schemas/guestBookings.schema';
 import { HostBooking, HostBookingSchema } from 'src/schemas/hostBookings.schema';
 import { ListingBooking, ListingBookingSchema } from 'src/schemas/listingBookings.schema';
 
 import { JwtModule } from '@nestjs/jwt';
 import { SocketGateway } from 'src/socket-gateway';
-
-/*
-
-import { Booking, Listing, GuestBookings, HostBooking, ListingBooking } from '../schemas/'; // Replace with actual models
-*/
 
 @Module({
   imports: [

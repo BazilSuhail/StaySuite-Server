@@ -34,9 +34,8 @@ export class GuestBookingsService {
     await listingBooking.save();
 
     const guestBooking = await this.guestBookingModel.findById(userId);
-    console.log(guestBooking)
-    //if (!guestBooking) throw new NotFoundException('Guest booking document kajsdnj not found');
-    console.log("asd = > " + userId);
+    if (!guestBooking) throw new NotFoundException('Guest booking document kajsdnj not found');
+    //console.log("asd = > " + userId);
 
     guestBooking.bookings.push(newBooking._id.toString());
     await guestBooking.save();
@@ -51,11 +50,11 @@ export class GuestBookingsService {
       const newHostBooking = new this.hostBookingModel({ _id: hostId, bookingsMade: 1, bookings: [newBooking._id] });
       await newHostBooking.save();
     }
-
-    // Notify host via socket
+ 
+    const ListingAddress = await this.listingModel.findById(listingId).select("address");
     const message = {
-      message: 'Your listing has a new reservation',
-      location: 'Location Placeholder', // Replace with address logic
+      message: "Your Listing has a new reservation",
+      location: ListingAddress.address.suburb + ", " + ListingAddress.address.country,
       details: specialRequests,
       listing_Id: listingId,
       bookingId: newBooking._id,
@@ -72,13 +71,12 @@ export class GuestBookingsService {
     const listingBooking = await this.listingBookingModel.findById(listingId);
     if (!listingBooking) throw new NotFoundException('Listing not found');
 
-    // Filter out null bookings and make sure booking is valid before proceeding
     const bookings = await Promise.all(
       listingBooking.bookings.map((id) => this.bookingModel.findById(id))
     );
 
     const blockedDates = bookings.flatMap((booking) => {
-      if (!booking) return [];  // If booking is null, return an empty array
+      if (!booking) return [];
 
       const dates = [];
       const current = new Date(booking.checkIn);
