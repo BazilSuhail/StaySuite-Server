@@ -9,6 +9,7 @@ import { HostListingsModule } from './hostListing/hostListing.module';
 import { ServeStaticModule } from '@nestjs/serve-static';
 import { join } from 'path';
 import { SocketGateway } from './socket-gateway';
+import { GuestBookingsModule } from './guestBooking/guestBooking.module';
 //const SocketGateway = require('./socket-gateway');
 
 @Module({
@@ -24,6 +25,7 @@ import { SocketGateway } from './socket-gateway';
     ListingsModule,
     ListingRatingModule,
     HostListingsModule,
+    GuestBookingsModule,
   ],
 
   providers: [SocketGateway], // Register the WebSocket Gateway

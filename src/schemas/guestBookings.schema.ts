@@ -1,8 +1,8 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document, Schema as MongooseSchema } from 'mongoose';
 
-@Schema()
-export class GuestListingBooking extends Document {
+@Schema({ collection: 'guestbookings' })
+export class GuestBookings extends Document {
   @Prop({
     type: [
       {
@@ -42,4 +42,4 @@ export class GuestListingBooking extends Document {
   bookings: string[];
 }
 
-export const GuestListingBookingSchema = SchemaFactory.createForClass(GuestListingBooking);
+export const GuestBookingSchema = SchemaFactory.createForClass(GuestBookings);

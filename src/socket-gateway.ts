@@ -43,7 +43,7 @@ import {
     }
   
     // Send a message to a specific user
-    sendMessageToUser(userId: string, message: string) {
+    sendMessageToUser(userId: string, message: Object) {
       const socketId = this.connectedUsers.get(userId);
       if (socketId) {
         this.server.to(socketId).emit('notification', message);
@@ -54,10 +54,10 @@ import {
     }
   
     // Example of handling custom messages
-    @SubscribeMessage('message')
+    /*@SubscribeMessage('message')
     handleMessage(client: Socket, data: string) {
       console.log(`Message from ${client.id}: ${data}`);
       client.emit('response', `Server received: ${data}`);
-    }
+    }*/
   }
   
