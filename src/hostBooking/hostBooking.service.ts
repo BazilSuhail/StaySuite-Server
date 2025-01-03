@@ -17,7 +17,7 @@ export class HostBookingsService {
     @InjectModel(Notification.name) private readonly notificationModel: Model<Notification>,
     @InjectModel(User.name) private readonly userModel: Model<User>,
     private readonly socketGateway: SocketGateway
-  ) {}
+  ) { }
 
   // Get Host's Bookings
   async getHostBookings(userId: string) {
@@ -80,18 +80,27 @@ export class HostBookingsService {
 
   // Get User Details
   async getUserDetailsById(userId: string) {
+    //console.log(userId)
     const user = await this.userModel.findById(userId).select('location username email bio socialLinks');
+    //console.log(user)
     if (!user) {
       throw new NotFoundException('User not found.');
     }
-
-    return {
+    const user_detials = {
       location: user.location,
       username: user.username,
       email: user.email,
       bio: user.bio,
       socialLinks: user.socialLinks,
-    };
+    }
+    return user_detials;
+    /*return {
+       location: user.location,
+       username: user.username,
+       email: user.email,
+       bio: user.bio,
+       socialLinks: user.socialLinks,
+    };*/
   }
 
   // Get Booking Details for Notification
