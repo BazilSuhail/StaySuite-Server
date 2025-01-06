@@ -27,23 +27,52 @@ export class ListingsService {
   }
 
   async getListingsByFiltersFromClient(filters: any) {
-    const { title, suburb, country, minPrice, maxPrice, category, beds, bathrooms } = filters;
+    const {
+      title,
+      suburb,
+      country,
+      minPrice,
+      maxPrice,
+      category,
+      beds,
+      bathrooms
+    } = filters;
+  
+    console.log(filters)
     const query: any = {};
-
-    if (title) query.title = { $regex: title, $options: 'i' };
-    if (suburb) query['address.suburb'] = { $regex: suburb, $options: 'i' };
-    if (country) query['address.country'] = { $regex: country, $options: 'i' };
-    if (minPrice || maxPrice) {
-      query.price = { ...(minPrice && { $gte: minPrice }), ...(maxPrice && { $lte: maxPrice }) };
+  
+    // Only add the 'title' filter if it's provided and not empty
+    if (title && title !== '') query.title = { $regex: title, $options: 'i' };
+  
+    // Only add the 'suburb' filter if it's provided and not empty
+    if (suburb && suburb !== '') query['address.suburb'] = { $regex: suburb, $options: 'i' };
+  
+    // Only add the 'country' filter if it's provided and not empty
+    if (country && country !== '') query['address.country'] = { $regex: country, $options: 'i' };
+  
+    // Handle the price filters (minPrice and maxPrice), only apply them if they are not the default
+    if ((minPrice && minPrice !== 'Any') || (maxPrice && maxPrice !== 'Any')) {
+      query.price = {};
+      if (minPrice && minPrice !== 'Any') query.price.$gte = minPrice;
+      if (maxPrice && maxPrice !== 'Any') query.price.$lte = maxPrice;
     }
-    if (category) query.category = category;
-    if (beds) query.beds = { $gte: beds };
-    if (bathrooms) query.bathrooms = { $gte: bathrooms };
-
+  
+    // Only add the 'category' filter if it's provided and not empty
+    if (category && category !== '') query.category = category;
+  
+    // Only add 'beds' filter if the value is not 'Any'
+    if (beds && beds !== 'Any') query.beds = { $gte: beds };
+  
+    // Only add 'bathrooms' filter if the value is not 'Any'
+    if (bathrooms && bathrooms !== 'Any') query.bathrooms = { $gte: bathrooms };
+  
+    console.log('Final query:', query);
+  
+    // Return the filtered listings
     const listings = await this.listingModel.find(query);
     return listings;
   }
-
+  
   async getListingById(listingId: string, userId: string) {
     if (!listingId) throw new BadRequestException('Invalid listing ID.');
 

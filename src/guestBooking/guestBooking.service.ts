@@ -9,6 +9,7 @@ import { GuestBookings } from 'src/schemas/guestBookings.schema';
 import { HostBookings } from 'src/schemas/hostBookings.schema';
 import { ListingBooking } from 'src/schemas/listingBookings.schema';
 import { SocketGateway } from '../socket-gateway';
+import { Notification } from 'src/schemas/notifications.schema';
 
 @Injectable()
 export class GuestBookingsService {
@@ -18,6 +19,7 @@ export class GuestBookingsService {
     @InjectModel(GuestBookings.name) private readonly guestBookingModel: Model<GuestBookings>,
     @InjectModel(HostBookings.name) private readonly hostBookingModel: Model<HostBookings>,
     @InjectModel(ListingBooking.name) private readonly listingBookingModel: Model<ListingBooking>,
+        @InjectModel(Notification.name) private readonly notificationModel: Model<Notification>,
     private readonly socketGateway: SocketGateway,
   ) { }
 
@@ -60,6 +62,12 @@ export class GuestBookingsService {
       bookingId: newBooking._id,
     };
     this.socketGateway.sendMessageToUser(hostId, message);
+
+    
+    // Saving notification
+    const saveNotification = await this.notificationModel.findById(hostId);
+    saveNotification.notifications.push(message);
+    await saveNotification.save();
 
     await newBooking.save();
     return { message: 'Booking created successfully!', booking: newBooking };

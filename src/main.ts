@@ -12,7 +12,7 @@ async function bootstrap() {
 
   // Enable CORS
   app.enableCors({
-    origin: process.env.FRONTEND_URL || 'http://localhost:5173', // Use environment variable for flexibility
+    origin: process.env.FRONTEND_URL || 'http://localhost:5173' || 'http://localhost:3000', // Use environment variable for flexibility
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
     credentials: true, // Allow cookies and credentials
   });

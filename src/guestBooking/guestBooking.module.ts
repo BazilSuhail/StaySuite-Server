@@ -11,6 +11,7 @@ import { ListingBooking, ListingBookingSchema } from 'src/schemas/listingBooking
 
 import { JwtModule } from '@nestjs/jwt';
 import { SocketGateway } from 'src/socket-gateway';
+import { Notification, NotificationSchema } from 'src/schemas/notifications.schema';
 
 @Module({
   imports: [
@@ -24,6 +25,7 @@ import { SocketGateway } from 'src/socket-gateway';
       { name: GuestBookings.name, schema: GuestBookingSchema },
       { name: ListingBooking.name, schema: ListingBookingSchema },
       { name: HostBookings.name, schema: HostBookingSchema },
+      { name: Notification.name, schema: NotificationSchema },
     ]),
   ],
   controllers: [GuestBookingsController],
