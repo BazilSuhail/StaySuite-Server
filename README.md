@@ -1,99 +1,80 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
-</p>
+## StaySuite's Server
+**StaySuite** is a property rental platform similar offering key features such as user authentication, booking management, saving travelling history and favurite listings for guests while enabling  host to manange listings via dashboard and seamlessly handle  reservations made on there listings. It supports secure authentication using `JWT`, real-time updates for both guests and hosts with `Socket.io`, and image uploads of listings with `Multer`. Built with `Nuxt.js` for the frontend,` Nest.js `for the backend, and `MongoDB` for data storage, the platform ensures a seamless and efficient user experience.
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+</br>
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+[![Open Source Love svg1](https://badges.frapsoft.com/os/v1/open-source.svg?v=103)](#)
+[![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat&label=Contributions&colorA=red&colorB=black	)](#)
 
-## Description
+### Project Description
+This repository contains the backend for the `StaySuite` property rental platform, built with Nest.js, MongoDB, JWT, Socket.io, and Multer. It handles user authentication, booking management, real-time updates, and secure file uploads, ensuring a scalable and efficient system.
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+Nest.js, with its modular architecture and TypeScript support, is ideal for this project as it enhances maintainability, enforces best practices, and provides built-in support for WebSockets, making real-time features seamless. MongoDB ensures flexible data handling, while JWT secures authentication. Socket.io enables instant communication between guests and hosts, and Multer efficiently manages media uploads.
 
-## Project setup
+### 🤖 Tech Stack 
+<a href="#"> 
+<img alt="TypeScript" src="https://img.shields.io/badge/TypeScript-%232F73B4.svg?&style=for-the-badge&logo=TypeScript&logoColor=white"/>
 
+<img alt="Nest.js" src="https://img.shields.io/badge/Nest.js-%23E0234E.svg?&style=for-the-badge&logo=NestJS&logoColor=white"/>
+
+<img alt="MongoDB" src ="https://img.shields.io/badge/MongoDB-%234ea94b.svg?&style=for-the-badge&logo=mongodb&logoColor=white"/> 
+ <img alt="JWT Auth" src="https://img.shields.io/badge/JWT%20Auth-%23F7B731.svg?&style=for-the-badge&logo=json-web-tokens&logoColor=white"/>
+
+<img alt="Socket.IO" src="https://img.shields.io/badge/Socket.IO%20-%23010101.svg?&style=for-the-badge&logo=socket.io&logoColor=white"/>
+ </a>
+ 
+
+---
+- Check out the latest demo of Project [StaySuite-Site](https://collabora8r.vercel.app/). 
+- Find the Client Repository of this Project Here [StaySuite-Client](https://github.com/BazilSuhail/StaySuite-Client). 
+---
+
+### Run Locally
+Clone the project using the following command:
 ```bash
-$ npm install
+   git clone https://github.com/BazilSuhail/StaySuite-Server.git
 ```
-
-## Compile and run the project
-
+Go to the project directory
 ```bash
-# development
-$ npm run start
-
-# watch mode
-$ npm run start:dev
-
-# production mode
-$ npm run start:prod
+   cd StaySuite-Server
 ```
-
-## Run tests
-
+Then **Run** this command in your terminal to install all required dependancies:
 ```bash
-# unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
+   npm install
 ```
-
-## Deployment
-
-When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
-
-If you are looking for a cloud-based platform to deploy your NestJS application, check out [Mau](https://mau.nestjs.com), our official platform for deploying NestJS applications on AWS. Mau makes deployment straightforward and fast, requiring just a few simple steps:
-
+In the project directory, you can run:
 ```bash
-$ npm install -g mau
-$ mau deploy
-```
+   npm run start:dev
+``` 
+Runs the app in the development mode. Your server will be running at port 3001, 
+Open [http://localhost:3001](http://localhost:3001) or also you can modify it in the **.env** file.
+## Features
 
-With Mau, you can deploy your application in just a few clicks, allowing you to focus on building features rather than managing infrastructure.
+#### User Authentication
+- **Signup Page**: A registration api for new users to get register themselves as a Guest or Host.
+- **Login Page**: A login api for existing users allowing them to log into there accounts.
 
-## Resources
+#### Admin Panel
+- **Listings Management**: Admin api enabling him to view, add, and remove property listings.
+- **Bookings Management**: Admin api enabling him to view all bookings, including user and property details.
 
-Check out a few resources that may come in handy when working with NestJS:
+#### Protected Routes
+- **User Profile**: User api enabling him to view his information and .
+- **Admin Panel**: Accessible api's only to Host users.
+- **Booking history**: Guests api's enabling them to can view there booking history.
+- **Redirection for Unauthenticated Users**: Users attempting to access protected routes are redirected to the login page.
 
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Deploy your application to AWS with the help of [NestJS Mau](https://mau.nestjs.com) in just a few clicks.
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
+#### Booking System
+- **Booking Page**: Users api enabling them to submit bookings, which are saved to the backend.
+- **Reserved Bookings for Guests Page**: Displaying reserved bookings api for each user.
+- **Reserved Bookings for Host Page**: Displaying api for reserved bookings on Hosts Listings.
 
-## Support
+#### Mini Admin Panel
+- **Listings Management**: Api for Host to add new listings with property details and images, and list view for displaying and deleting existing listings.
+- **Bookings Management**: Admin's api to overview of all bookings with details for each booking, including user and property information.
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
-
-## Stay in touch
-
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
-
-## License
-
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+#### Backend Security
+- **Role-Based Access Control**: Routes are protected based on user roles (e.g., admin).
+- **JWT Middleware**: Secures routes that require authentication.
+- **Password Hashing**: Passwords are hashed using bcrypt before being saved to the database.
+  
